@@ -3,9 +3,14 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var http    = require('http'), 
+    ws      = require("./vendor/ws"),
+    express = require('express'), 
+    redis   = require('redis'); 
 
+//redis.debug_mode = true;
 var app = module.exports = express.createServer();
+var client = redis.createClient();
 
 // Configuration
 
@@ -26,13 +31,41 @@ app.configure('production', function(){
   app.use(express.errorHandler()); 
 });
 
+var clients = []
 // Routes
-
-app.get('/', function(req, res){
-  res.render('index', {
-    title: 'Express'
-  });
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/public/index.html');
 });
+
+app.post('/status', function(req, res){
+  var status = req.body.status;
+  client.sadd('tw.statuses', status);
+  clients.forEach(function(client) {
+    client.write(status);
+  });
+  res.send({status: status}, {"Content-Type": "text/plain"}, 200);
+})
+
+app.get('/status', function(req, res){
+  client.smembers('tw.statuses', function(err, replies){
+    var statuses = [];
+    replies.forEach(function (reply, index) {
+      statuses.push(reply.toString());
+    });
+    res.send({status:statuses}, {"Content-Type": "text/plain"}, 200);
+  });
+})
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
+ws.createServer(function (websocket) {
+  clients.push(websocket);
+
+  websocket.addListener("connect", function (resource) {
+    console.log("connect: " + resource);
+  }).addListener("close", function () { 
+    clients.remove(websocket);
+    console.log("close");
+  });  
+}).listen(8080);
