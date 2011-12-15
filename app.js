@@ -59,6 +59,7 @@ app.get('/status', function(req, res){
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
+// WebSocket
 ws.createServer(function (websocket) {
   clients.push(websocket);
 
@@ -67,5 +68,5 @@ ws.createServer(function (websocket) {
   }).addListener("close", function () { 
     clients.remove(websocket);
     console.log("close");
-  });  
+  });
 }).listen(8080);

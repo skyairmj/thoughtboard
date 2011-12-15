@@ -1,0 +1,6 @@
+NodeJS+nvm+npm+express+websocket
+
+to Run the application,
+$> nvm use stable
+$> npm install -d
+$> node app.js
