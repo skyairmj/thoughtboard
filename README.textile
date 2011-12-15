@@ -1,4 +1,4 @@
-NodeJS+nvm+npm+express+websocket
+NodeJS+nvm+npm+express+websocket+Redis
 
 to Run the application,
 $> nvm use stable
