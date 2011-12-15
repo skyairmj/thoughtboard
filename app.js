@@ -66,7 +66,9 @@ ws.createServer(function (websocket) {
   websocket.addListener("connect", function (resource) {
     console.log("connect: " + resource);
   }).addListener("close", function () { 
-    clients.remove(websocket);
-    console.log("close");
+    var index = clients.indexOf(websocket);
+    if(index != -1)clients.splice(index, 1);
+    console.log("connection closed");
   });
+
 }).listen(8080);
