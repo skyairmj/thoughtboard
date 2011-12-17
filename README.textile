@@ -4,3 +4,6 @@ to Run the application,
 $> nvm use stable
 $> npm install -d
 $> node app.js
+
+
+https://developer.apple.com/library/ios/#documentation/iPhone/Conceptual/iPhone101/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007514

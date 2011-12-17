@@ -38,6 +38,7 @@ app.get('/', function (req, res) {
 });
 
 app.post('/status', function(req, res){
+  console.log(req.body)
   var status = req.body.status;
   client.sadd('tw.statuses', status);
   clients.forEach(function(client) {
