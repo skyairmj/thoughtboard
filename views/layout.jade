@@ -1,6 +1,32 @@
-!!!
-html
+!!!5
+html(lang='en')
   head
-    title= title
+    title ThoughtBoard: Find Out News Surrounding!
     link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='javascripts/jquery.min.js')
+    script(type='text/javascript')
+      $(document).ready(function(){
+        if(!("WebSocket" in window)) {
+          alert("Sorry, the build of your browser does not support WebSockets. Please use latest Chrome or Webkit nightly");
+          return;
+        }
+
+        ws = new WebSocket("ws://localhost:8080/");
+        ws.onmessage = function(evt) { 
+          var p = $("<div class='tweet' style='display:none'><div class='content'>"+ evt.data+ "</div></div>");
+          if($('#tweets div.tweet').size() > 15) {
+            $('#tweets div.tweet:last').slideDown(100, function() {
+              $(this).remove();
+            });
+          }
+          $('#tweets').prepend(p);
+          p.slideDown(140);
+        };
+        ws.onclose = function() {
+          //alert("socket closed");
+        };
+        ws.onopen = function() {
+          //alert("connected...");
+        };
+      });
   body!= body

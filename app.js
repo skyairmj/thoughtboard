@@ -32,9 +32,12 @@ app.configure('production', function(){
 });
 
 var clients = []
+
 // Routes
 app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/public/index.html');
+  res.render('index', {
+    title: 'ThoughtBoard'
+  });
 });
 
 app.post('/status', function(req, res){
