@@ -1,9 +1,22 @@
 NodeJS+nvm+npm+express+websocket+Redis
 
-to Run the application,
+Prerequisite:
+1. nvm installation: https://github.com/creationix/nvm
+2. nodejs installation: nvm install v0.4.9
+3. npm installation: http://npmjs.org/
+4. redis installaton: brew install redis
+
+Running the application, please follow the above steps(assuming you're on the root_dir of the application):
 $> nvm use stable
 $> npm install -d
 $> node app.js
 
+REST API:
+URL: http://localhost:3000/status
+Method: post
+Request Header: content-type: application/x-www-form-urlencoded
+Request Body: status=blahblah
 
-https://developer.apple.com/library/ios/#documentation/iPhone/Conceptual/iPhone101/Articles/00_Introduction.html#//apple_ref/doc/uid/TP40007514
+Tips:
+1. node_redis: https://github.com/mranney/node_redis
+2. Firefox plugin RESTClient is a very helpful tools for posting status via REST URL to the server
