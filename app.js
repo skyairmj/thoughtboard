@@ -35,8 +35,16 @@ var clients = []
 
 // Routes
 app.get('/', function (req, res) {
-  res.render('index', {
-    title: 'ThoughtBoard'
+  var statuses = [];
+  client.smembers('tw.statuses', function(err, replies){
+    var statuses = [];
+    replies.forEach(function (reply, index) {
+      statuses.push(reply.toString());
+    });
+    res.render('index', {
+      title: 'ThoughtBoard',
+      statuses: statuses
+    });
   });
 });
 
@@ -48,16 +56,6 @@ app.post('/status', function(req, res){
     client.write(status);
   });
   res.send({status: status}, {"Content-Type": "text/plain"}, 200);
-})
-
-app.get('/status', function(req, res){
-  client.smembers('tw.statuses', function(err, replies){
-    var statuses = [];
-    replies.forEach(function (reply, index) {
-      statuses.push(reply.toString());
-    });
-    res.send({status:statuses}, {"Content-Type": "text/plain"}, 200);
-  });
 })
 
 app.listen(3000);

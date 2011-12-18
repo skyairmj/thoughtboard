@@ -13,7 +13,7 @@ html(lang='en')
 
         ws = new WebSocket("ws://localhost:8080/");
         ws.onmessage = function(evt) { 
-          var p = $("<div class='tweet' style='display:none'><div class='content'>"+ evt.data+ "</div></div>");
+          var p = $("<div class='tweet'><div class='content'>"+ evt.data+ "</div></div>");
           if($('#tweets div.tweet').size() > 15) {
             $('#tweets div.tweet:last').slideDown(100, function() {
               $(this).remove();

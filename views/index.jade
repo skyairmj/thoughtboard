@@ -1,5 +1,11 @@
 h1= title
 p Find Out News Surrounding!
 fieldset
-  legend People Are Saying...
+  legend What Is Happenning?
   div#tweets
+    each item, i in statuses 
+      div.tweet
+        div.content
+          #{item}
+footer
+  &copy; 2011 ThoughtBoard

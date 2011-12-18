@@ -1,8 +1,41 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow: hidden;
 }
 
 a {
   color: #00B7FF;
+}
+
+fieldset {
+  height: 500px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+#tweets {
+  width: 990px;
+  height: 490px;
+  overflow-y: auto;
+}
+
+.tweet {
+  border: 1px solid #999;
+  width: 98%;
+  padding: 1px;
+  margin: 0 0 8px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.tweet div.content {
+  word-break:break-all; 
+}
+
+footer {
+  text-align: center;
 }
